@@ -94,13 +94,23 @@ bookmarkRoutes.get('/', async (req, res) => {
         const data = await Promise.all(promises);
         const data1 = await Promise.all(promises1);
 
-        if(data[0] && data1[0]){
+        for(let i=0; i<data.length || i<data1.length; i++){
+            if(data[i]==null && i<data.length)
+                data.splice(i,1);
+            if(data1[i]==null && i<data1.length)
+                data1.splice(i,1);
+        }
+        // console.log(data, data1);
+        if(data.length!==0 && data1.length!==0){
+            // console.log(1);
             res.render('bookmarks', { title : 'Bookmarks', data, data1 });
         }  
-        else if(data[0]){
+        else if(data.length!==0){
+            // console.log(2);
             res.render('bookmarks', { title : 'Bookmarks', data, data1 : [] });
         }
         else{
+            // console.log(3);
             res.render('bookmarks', { title : 'Bookmarks', data1, data : [] });
         }
     }
