@@ -1,0 +1,28 @@
+<!-- <img src="/images/hlws1.jpg"> -->
+<div style="background-color:#F6F6F6;padding:5px;margin:0;">
+    <h1 style="margin:0;"><span style="font-family: 'Fredoka One', cursive;cursor:pointer;" id="app">
+        HLWB Services</span></h1>
+
+    <p id="headerLoggedIn" style="text-align:center;display:none;"><span>
+        <a href="/home">Home</a> | 
+        <a href="/rental/houseOwnerInfo">House Owner</a> | <a href="/land/landOwnerInfo">
+        Land Owner</a> | <a href="/bookmarks">Bookmarks</a> | <a href="/logout">Log Out</a>
+        </span>
+    </p>
+    <p id="headerNotLoggedIn" style="text-align:center;display:none;"><span><a href="/login">Log In</a> | 
+        <a href="/register">Register</a>
+        </span>
+    </p>
+</div>
+<hr />
+<script>
+    if(document.cookie.includes('userID')){
+        document.getElementById('headerLoggedIn').style.display = 'block'
+    }
+    else{
+        document.getElementById('headerNotLoggedIn').style.display = 'block'
+    }
+    document.getElementById('app').addEventListener('click', () => {
+        window.location.href = '/home';
+    })
+</script>

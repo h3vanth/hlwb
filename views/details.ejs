@@ -1,0 +1,176 @@
+<%- include('./partials/head.ejs') %>
+
+<style>
+    .fields{
+        color: blue;
+    }
+    table, th, td{
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+    }
+    table{
+        width: 80%;
+        background-color: white;
+    }
+    th, td{
+        vertical-align: top;
+    }
+</style>
+</head>
+<body>
+    <%- include('./partials/common-area.ejs') %>
+    <p style="border-bottom:1px solid black;font-weight:bolder;">Details</p>
+    <% if(H_L == 'H' && (data.length!==0)){ %>
+    <% if(bookmarked){ %>
+        <p style="text-align:center;"><span id="bookmark" style="cursor:pointer;display:none;">
+            <i class="far fa-bookmark 1x"></i></span>
+            <span id="undo" style="cursor:pointer;">
+                <i class="fas fa-bookmark 1x"></i> Bookmarked</span> 
+        </p>
+    <% }else{ %>
+        <p style="text-align:center;"><span id="bookmark" style="cursor:pointer;">
+            <i class="far fa-bookmark 1x"></i></span>
+            <span id="undo" style="cursor:pointer;display:none;">
+                <i class="fas fa-bookmark 1x"></i> Bookmarked</span> 
+        </p>
+    <% } %>
+    <div style="text-align:center;">
+        <span style="font-weight:bolder;">Posted on : </span>
+        <span><%= data[0].createdAt.toDateString() %></span>
+    </div>
+    <br />
+    <div id="details">
+        
+        <table style="margin-left:auto;margin-right:auto;">
+            <tr>
+                <th>Locality</th>
+                <th>House details</th>
+                <th>Address</th>
+                <th>House owner details</th>
+            </tr>
+    <% data.forEach(o => { %>
+            <tr>
+                <td>
+                    <span class="fields">State : </span><%= o.state %><br />
+                    <span class="fields">City : </span><%= o.city %><br />
+                    <span class="fields">Area : </span><%= o.area %>
+                </td>
+                <td>
+                    <span class="fields">Number of rooms : </span><%= o.rooms %><br />
+                    <span class="fields">Rent (in Rs.) : </span><%= o.rent %><br />
+                    <span class="fields">Advance (in Rs.) : </span><%= o.advance %><br />
+                    <span class="fields">New house : </span><%= o.newHouse %><br />
+                    <span class="fields">Independent house : </span><%= o.independentHouse %><br />
+                    <% if(o.maxNo){ %>
+                    <span class="fields">Maximum number of members allowed : </span><%= o.maxNo %><br />
+                    <% } %>
+                    <span class="fields">Pets allowed : </span><%= o.pets %><br />
+                    <span class="fields">For family only : </span><%= o.family %>
+                </td>
+                <td>
+                    <span class="fields">House number : </span><%= o.houseNo %><br />
+                    <span class="fields">Street : </span><%= o.street %><br />
+                    <span class="fields">Area : </span><%= o.area %><br />
+                    <span class="fields">Landmark : </span><%= o.landmark %><br />
+                    <span class="fields">PIN code : </span><%= o.pin %>
+                </td>
+                <td>
+                    <span class="fields">Name : </span><%= o.fullName %><br />
+                    <span class="fields">Contact number : </span><%= o.mobileNo %><br />
+                    <% if(o.textArea){ %>
+                        <span class="fields">Comments : </span><%= o.textArea %>
+                    <% } %>
+                </td>
+            </tr>
+    <% }); %>
+        </table>
+    </div>
+    <% }else{ %>
+        <% if(bookmarked){ %>
+            <p style="text-align:center;"><span id="bookmark" style="cursor:pointer;display:none;">
+                <i class="far fa-bookmark 1x"></i></span>
+                <span id="undo" style="cursor:pointer;">
+                    <i class="fas fa-bookmark 1x"></i> Bookmarked</span> 
+            </p>
+        <% }else{ %>
+            <p style="text-align:center;"><span id="bookmark" style="cursor:pointer;">
+                <i class="far fa-bookmark 1x"></i></span>
+                <span id="undo" style="cursor:pointer;display:none;">
+                    <i class="fas fa-bookmark 1x"></i> Bookmarked</span> 
+            </p>
+        <% } %>
+        <div style="text-align:center;">
+            <span style="font-weight:bolder;">Posted on : </span>
+            <span><%= data[0].createdAt.toDateString() %></span>
+        </div>
+        <br />
+        <div id="details">
+            
+            <table style="margin-left:auto;margin-right:auto;">
+                <tr>
+                    <th>Locality</th>
+                    <th>Land details</th>
+                    <th>Address</th>
+                    <th>Land owner details</th>
+                </tr>
+        <% data.forEach(o => { %>
+                <tr>
+                    <td>
+                        <span class="fields">State : </span><%= o.state %><br />
+                        <span class="fields">City : </span><%= o.city %><br />
+                        <span class="fields">Area : </span><%= o.area %>
+                    </td>
+                    <td>
+                        <span class="fields">Sq ft. : </span><%= o.sqFt %><br />
+                        <span class="fields">Price (in Rs.) : </span><%= o.price %><br />
+                    </td>
+                    <td>
+                        <span class="fields">Street : </span><%= o.street %><br />
+                        <span class="fields">Area : </span><%= o.area %><br />
+                        <span class="fields">Landmark : </span><%= o.landmark %><br />
+                        <span class="fields">PIN code : </span><%= o.pin %>
+                    </td>
+                    <td>
+                        <span class="fields">Name : </span><%= o.fullName %><br />
+                        <span class="fields">Contact number : </span><%= o.mobileNo %><br />
+                        <% if(o.textArea){ %>
+                            <span class="fields">Comments : </span><%= o.textArea %>
+                        <% } %>
+                    </td>
+                </tr>
+        <% }); %>
+            </table>
+        </div>
+    <% } %>
+    <p style="text-align:center;">
+        <span id="previousPage" style="cursor:pointer;"><i class="fas fa-chevron-circle-left fa-1x"></i></span></p>
+    <br />        
+    <script>
+        let postID = '<%= id %>';
+        let H_L = '<%= H_L %>';
+
+        document.getElementById('bookmark').addEventListener('click', async () => {
+            document.getElementById('bookmark').style.display = 'none';
+            document.getElementById('undo').style.display = 'inline-block';
+            const res = await fetch('/bookmarks/bookmark', {
+                method: 'POST',
+                body: JSON.stringify({ postID, H_L }),
+                headers: { 'Content-Type': 'application/json' }
+            });
+        });
+        document.getElementById('undo').addEventListener('click', async () => {
+            document.getElementById('bookmark').style.display = 'inline-block';
+            document.getElementById('undo').style.display = 'none';
+            const res = await fetch('/bookmarks/bookmark', {
+                method: 'DELETE',
+                body: JSON.stringify({ postID, H_L }),
+                headers: { 'Content-Type': 'application/json' }
+            });
+        });
+
+        document.getElementById('previousPage').addEventListener('click', () => {
+            window.history.back();
+        });
+    </script>
+<%- include('./partials/footer.ejs') %>

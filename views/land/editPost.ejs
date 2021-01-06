@@ -1,0 +1,98 @@
+<%- include('../partials/head.ejs') %>
+
+    <style>
+        .displayNone{
+            display: none;
+            font-size: 12px;
+            color: red;
+        }
+        button{
+            cursor: pointer;
+        }
+    </style>
+    </head>
+    <body>
+        <%- include('../partials/common-area.ejs') %>
+        
+        <p style="text-align:center;cursor:pointer;">
+            <span id="previousPage"><i class="fas fa-chevron-circle-left fa-1x"></i></span>
+        </p>
+            
+        <div>
+            <form>
+                <table style="margin-left:auto;margin-right:auto;" id="<%= postID %>">
+                    <tr>
+                        <td><span>Name</span><span class="mandatory">*</span></td>
+                        <td><input type="text" name="fullName" id="fullName" value="<%= data.fullName %>" required /></td>
+                    </tr>
+                    <tr>
+                        <td><span>Mobile Number</span><span class="mandatory">*</span></td>
+                        <td><input type="text" name="mobileNo" id="mobileNo" 
+                            value="<%= data.mobileNo %>" required /><br />
+                            <span class="displayNone mobileNo">Enter a valid phone number</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span>House Number</span><span class="mandatory">*</span></td>
+                        <td><input type="text" name="houseNo" id="houseNo" value="<%= data.houseNo%>" required /></td>    
+                    </tr>
+                    <tr>
+                        <td><span>Street</span><span class="mandatory">*</span></td>
+                        <td><input type="text" name="street" id="street" value="<%= data.street %>" required /></td>
+                    </tr>
+                        <td><span>Area</span><span class="mandatory">*</span></td>
+                        <td><input type="text" name="area" id="area" value="<%= data.area %>" required /></td>
+                    </tr>
+                    <tr>
+                        <td><span>Landmark</span><span class="mandatory">*</span></td>
+                        <td><input type="text" name="landmark" id="landmark" value="<%= data.landmark %>" required /></td>
+                    </tr>
+                    <tr>
+                        <td><span>State</span><span class="mandatory">*</span></td>
+                        <td><input type="text" name="state" id="state" value="<%= data.state %>" required /></td>
+                    </tr>       
+                    <tr>
+                        <td><span>City</span><span class="mandatory">*</span></td>
+                        <td><input type="text" name="city" id="city" value="<%= data.city %>" required /></td>
+                    </tr>       
+                    <tr>
+                        <td><span>PIN Code</span><span class="mandatory">*</span></td>
+                        <td>
+                            <input type="text" name="pin" id="pin" value="<%= data.pin %>" required /><br />
+                            <span class="displayNone pin">Enter a valid pin code</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sq ft.<span class="mandatory">*</span></td>
+                        <td><input type="text" name="sqFt" id="sqFt" value="<%= data.sqFt %>" required /><br />
+                            <span class="displayNone sqFt">Enter a valid number</span></td>
+                    </tr>
+                    <tr>
+                        <td>Price (in Rs.)<span class="mandatory">*</span></td>
+                        <td><input type="text" name="price" id="price" value="<%= data.price %>" required /><br />
+                            <span class="displayNone price">Enter a valid amount</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Addition charges description(if any)</td>
+                        <td>
+                            <textarea id="textArea" name="textArea"><%= data.textArea %></textarea>
+                        </td>
+                    </tr>
+                    <!-- <tr>
+                        <td>Upload image<span class="mandatory">*</span></td>
+                        <td><input type="file" id="housePic" /></td>
+                    </tr> -->
+
+                </table>
+                <p style="text-align:center;">
+                    <button type="button" onclick="update();">Update</button>
+                    <button type="button" onclick="deletePost();">Delete</button>
+                </p>
+            </form>
+        </div>
+
+    <script src="/js/landOwnerInfoEdit.js"></script>
+  
+
+<%- include('../partials/footer.ejs') %> 

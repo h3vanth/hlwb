@@ -1,0 +1,79 @@
+<%- include('../partials/head.ejs') %>
+
+<style>
+    /* .fields{
+        color: blue;
+    } */
+    #displayTable, th.displayHead, td.displayData{
+        border-bottom: 1px solid #ddd;
+        border-collapse: collapse;
+    }
+    tr.displayRow:hover{
+        background-color: #f5f5f5;
+        cursor: pointer;
+    }
+   #displayTable{
+       width: 70%;
+   }
+   td.displayData{
+        text-align: center;
+   }
+</style>
+</head>
+<body>
+    <%- include('../partials/common-area.ejs') %>
+    <p style="text-align:center;font-weight:bolder;">Filter Results</p>
+    <div style="width:100%;">
+        
+        <table style="margin-left:auto;margin-right:auto;" id="displayTable">
+            <tr class="displayRow">
+                <th class="displayHead">City</th>
+                <th class="displayHead">Area</th>
+                <th class="displayHead">Rent(in Rs.)</th>
+                <th class="displayHead">Advance(in Rs.)</th>
+                <th class="displayHead">Posted On</th>
+            </tr>
+            <!-- <tr>
+                <td class="sticky"><input type="text" id="city" class="city"></input></td>
+                <td class="sticky"><input type="text" id="area" class="area"></input></td>
+                <td class="sticky"><input type="text" id="rent" class="rent"></input></td>
+                <td class="sticky"><input type="text" id="advance" class="advance"></input></td>
+            </tr> -->
+        <% if(data.length!=0){ %>
+        <% data.forEach(o => { %>
+            <tr id="<%= o._id %>" class="tableRow displayRow">
+                <td class="displayData"><%= o.city %></td>
+                <td class="displayData"><%= o.area %></td>
+                <td class="displayData"><%= o.rent %></td>
+                <td class="displayData"><%= o.advance %></td>
+                <td class="displayData"><%= o.createdAt.toDateString() %></td>
+            </tr>
+        <% }); %>
+        </table>
+        <% }else{ %>
+        </table>
+        <p style="text-align:center;font-weight:bolder;">No results :(</p>
+        <% } %>
+    </div>
+    <p style="text-align:center;">
+        <span id="previousPage" style="cursor:pointer;"><i class="fas fa-chevron-circle-left fa-1x"></i></span>   
+    </p>
+    
+   
+    <script>
+        const tr = document.querySelectorAll('tr.tableRow');
+
+        tr.forEach(row => row.addEventListener('click', () => {
+            const id = row.getAttribute("id");
+    
+            window.location.href = '/details/'+id;
+        }));
+
+        document.getElementById('previousPage').addEventListener('click', () => {
+            window.history.back();
+        });
+    </script>
+
+
+</body>
+<%- include('../partials/footer.ejs') %>

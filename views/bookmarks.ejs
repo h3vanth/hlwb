@@ -1,0 +1,111 @@
+<%- include('./partials/head.ejs') %>
+
+<style>
+    /* .p{
+        color:rgb(39, 143, 120);
+    } */
+    #displayTable, #displayTable1, th.displayHead, td.displayData{
+        border-bottom: 1px solid #ddd;
+        border-collapse: collapse;
+    }
+    tr.displayRow:hover{
+        background-color: #f5f5f5;
+        cursor: pointer;
+    }
+   #displayTable, #displayTable1{
+       width: 70%;
+   }
+   td.displayData{
+        text-align: center;
+   }
+   .sticky{
+       position: sticky;
+       position: -webkit-sticky;
+       top: 0;
+       background-color: white;
+       padding-top: 5px;
+       padding-bottom: 5px;
+   }
+</style>
+</head>
+<body>
+    <%- include('./partials/common-area.ejs') %>
+
+    <% if(data.length !==0 || data1.length !== 0){ %>
+    <p style="text-align:center;font-weight:bolder;">Bookmarked</p>
+    <% } %>
+    
+    <% if(data.length!==0){ %>
+
+    <p style="text-align:center;font-weight:bolder;">Rental Houses</p>
+    
+    <div style="width:100%;height:150px;overflow-y:auto;">
+        
+        <table style="margin-left:auto;margin-right:auto;" id="displayTable">
+            <tr class="displayRow">
+                <th class="displayHead sticky">City</th>
+                <th class="displayHead sticky">Area</th>
+                <th class="displayHead sticky">Rent (in Rs.)</th>
+                <th class="displayHead sticky">Advance (in Rs.)</th>
+                <th class="displayHead sticky">Posted On</th>
+            </tr>
+            
+            <% data.forEach(o => { %>
+                    <tr id="<%= o._id %>" class="tableRow displayRow">
+                        <td class="displayData"><%= o.city %></td>
+                        <td class="displayData"><%= o.area %></td>
+                        <td class="displayData"><%= o.rent %></td>
+                        <td class="displayData"><%= o.advance %></td>
+                        <td class="displayData"><%= o.createdAt.toDateString() %></td>
+                    </tr>
+            <% }); %>
+        </table>
+    </div>
+    <% }  %>
+    
+    <% if(data1.length!==0){ %>
+    <p style="text-align:center;font-weight:bolder;">Lands</p>
+    <div style="width:100%;">
+        <table style="margin-left:auto;margin-right:auto;" id="displayTable1">
+            <tr class="displayRow">
+                <th class="displayHead sticky">City</th>
+                <th class="displayHead sticky">Area</th>
+                <th class="displayHead sticky">Sq ft.</th>
+                <th class="displayHead sticky">Price (in Rs.)</th>
+                <th class="displayHead sticky">Posted On</th>
+            </tr>
+            
+            <% data1.forEach(o => { %>
+                    <tr id="<%= o._id %>" class="tableRow displayRow">
+                        <td class="displayData"><%= o.city %></td>
+                        <td class="displayData"><%= o.area %></td>
+                        <td class="displayData"><%= o.sqFt %></td>
+                        <td class="displayData"><%= o.price %></td>
+                        <td class="displayData"><%= o.createdAt.toDateString() %></td>
+                    </tr>
+            <% }); %>
+        </table>
+    </div>
+    <% } %>
+    <% if(data.length==0 && data1.length==0){ %>
+        <p style="text-align:center;font-weight:bolder;">No bookmarks :(</p>
+    <% } %>
+
+    <p style="text-align:center;">
+        <span id="previousPage" style="cursor:pointer;"><i class="fas fa-chevron-circle-left fa-1x"></i></span></p>
+       
+    <br />
+    <script>
+        const tr = document.querySelectorAll('tr.tableRow');
+
+        tr.forEach(row => row.addEventListener('click', () => {
+            const id = row.getAttribute("id");
+            
+            window.location.href = '/details/'+id;
+        }));
+
+        document.getElementById('previousPage').addEventListener('click', () => {
+            window.history.back();
+        });
+    </script>
+<%- include('./partials/footer.ejs') %>

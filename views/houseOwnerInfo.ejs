@@ -1,0 +1,134 @@
+<%- include('./partials/head.ejs') %>
+
+    <style>
+        .displayNone{
+            display: none;
+            font-size: 12px;
+            color: red;
+        }
+    </style>
+    </head>
+    <body>
+        <%- include('./partials/common-area.ejs') %>
+        
+        <p style="text-align:center;">
+            <span id="previousPage" style="cursor:pointer;"><i class="fas fa-chevron-circle-left fa-1x"></i></span>
+            <span> | </span>
+            <a href="/rental/edit">Edit a post</a>
+        </p>
+            
+        <div>
+            <form>
+                <table style="margin-left:auto;margin-right:auto;" id="displayTable">
+                    <tr>
+                        <td><span>Name</span><span class="mandatory">*</span></td>
+                        <td><input type="text" name="fullName" id="fullName" value="<%= data[0].firstName + ' ' +
+                            data[0].lastName %>" required /></td>
+                    </tr>
+                    <tr>
+                        <td><span>Mobile Number</span><span class="mandatory">*</span></td>
+                        <td><input type="text" name="mobileNo" id="mobileNo" 
+                            value="<%= data[0].mobileNo %>" required /><br />
+                            <span class="displayNone mobileNo">Enter a valid phone number</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span>House Number</span><span class="mandatory">*</span></td>
+                        <td><input type="text" name="houseNo" id="houseNo" value="<%= data[0].houseNo%>" required /></td>    
+                    </tr>
+                    <tr>
+                        <td><span>Street</span><span class="mandatory">*</span></td>
+                        <td><input type="text" name="street" id="street" value="<%= data[0].street %>" required /></td>
+                    </tr>
+                        <td><span>Area</span><span class="mandatory">*</span></td>
+                        <td><input type="text" name="area" id="area" value="<%= data[0].area %>" required /></td>
+                    </tr>
+                    <tr>
+                        <td><span>Landmark</span><span class="mandatory">*</span></td>
+                        <td><input type="text" name="landmark" id="landmark" value="<%= data[0].landmark %>" required /></td>
+                    </tr>
+                    <tr>
+                        <td><span>State</span><span class="mandatory">*</span></td>
+                        <td><input type="text" name="state" id="state" value="<%= data[0].state %>" required /></td>
+                    </tr>       
+                    <tr>
+                        <td><span>City</span><span class="mandatory">*</span></td>
+                        <td><input type="text" name="city" id="city" value="<%= data[0].city %>" required /></td>
+                    </tr>       
+                    <tr>
+                        <td><span>PIN Code</span><span class="mandatory">*</span></td>
+                        <td>
+                            <input type="text" name="pin" id="pin" value="<%= data[0].pin %>" required /><br />                            
+                            <span class="displayNone pin">Enter a valid pin code</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Rent (in Rs.)<span class="mandatory">*</span></td>
+                        <td><input type="text" name="rent" id="rent" required /><br />
+                            <span class="displayNone rent">Enter a valid amount</span></td>
+                    </tr>
+                    <tr>
+                        <td>Advance (in Rs.)<span class="mandatory">*</span></td>
+                        <td><input type="text" name="advance" id="advance" required /><br />
+                            <span class="displayNone advance">Enter a valid amount</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Independent house<span class="mandatory">*</span></td>
+                        <td>
+                            <input type="radio" name="independentHouse" value="Yes" />Yes
+                            <input type="radio" name="independentHouse" value="No" checked="checked" />No
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>New house<span class="mandatory">*</span></td>
+                        <td>
+                            <input type="radio" name="newHouse" value="Yes" />Yes
+                            <input type="radio" name="newHouse" value="No" checked="checked" />No
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Number of bed rooms<span class="mandatory">*</span></td>
+                        <td><input type="text" name="rooms" id="rooms" required /><br />
+                            <span class="displayNone rooms">Enter a valid number</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Maximum number of members allowed</td>
+                        <td><input type="text" name="maxNo" id="maxNo" /><br />
+                            <span class="displayNone maxNo">Enter a valid number</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Pets allowed</td>
+                        <td>
+                            <input type="radio" name="pets" value="Yes" checked="checked" />Yes
+                            <input type="radio" name="pets" value="No" />No
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>For family only<span class="mandatory">*</span></td>
+                        <td>
+                            <input type="radio" name="family" value="Yes" checked="checked" />Yes
+                            <input type="radio" name="family" value="No" />No
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Addition charges description(if any)</td>
+                        <td>
+                            <textarea id="textArea" name="textArea"></textarea>
+                        </td>
+                    </tr>
+                    <!-- <tr>
+                        <td>Upload image<span class="mandatory">*</span></td>
+                        <td><input type="file" id="housePic" /></td>
+                    </tr> -->
+
+                </table>
+                <p style="text-align:center;"><input type="submit" value="POST" /></p>
+            </form>
+        </div>
+
+    <script src="/js/houseOwnerInfo.js"></script>
+
+<%- include('./partials/footer.ejs') %> 

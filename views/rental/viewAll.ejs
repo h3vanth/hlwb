@@ -1,0 +1,236 @@
+<%- include('../partials/head.ejs') %>
+<style>
+    #displayTable, th.displayHead, td.displayData{
+        border-bottom: 1px solid #ddd;
+        border-collapse: collapse;
+    }
+    tr.displayRow:hover{
+        background-color: #f5f5f5;
+        cursor: pointer;
+    }
+    #displayTable{
+       width: 70%;
+   }
+   td.displayData{
+        text-align: center;
+   }
+   .sticky{
+       position: sticky;
+       position: -webkit-sticky;
+       top: 0;
+       background-color: white;
+       padding-top: 5px;
+       padding-bottom: 5px;
+   }
+   #hide{
+        position: fixed;
+        display: none;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgba(0,0,0,0.8);
+        z-index: 2;
+        cursor: pointer;
+   }
+   #container{
+        text-align: center;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+   }
+   #hiddenTable{
+       color: white;
+   }
+
+</style>
+</head>
+<body>
+    <%- include('../partials/common-area.ejs') %>
+
+    <% if(data.length !== 0){ %>
+    <p style="text-align:center;font-weight:bolder;">
+        Rental House Deals
+    </p>
+
+    <p style="text-align:center;"><button type="button" style="width:60px;height:25px;cursor:pointer;" onclick="filter();">
+        <i class="fas fa-filter"></i>Filter</button></p>   
+
+    <div style="width:100%;">
+        
+        <table style="margin-left:auto;margin-right:auto;" id="displayTable">
+            <tr class="displayRow">
+                <th class="displayHead sticky">City</th>
+                <th class="displayHead sticky">Area</th>
+                <th class="displayHead sticky">Rent(in Rs.)</th>
+                <th class="displayHead sticky">Advance(in Rs.)</th>
+                <th class="displayHead sticky">Posted On</th>
+            </tr>
+            
+            <% data.forEach(o => { %>
+            <tr id="<%= o._id %>" class="tableRow displayRow">
+                <td class="displayData"><%= o.city %></td>
+                <td class="displayData"><%= o.area %></td>
+                <td class="displayData"><%= o.rent %></td>
+                <td class="displayData"><%= o.advance %></td>
+                <td class="displayData"><%= o.createdAt.toDateString() %></td>
+            </tr>
+            <% }); %>
+        </table>
+    </div>
+    <div id="hide">
+        <div id="container">
+        <form action="/rental/filterSearch" method="GET">
+            <table style="margin-left:auto;margin-right:auto;" id="hiddenTable">
+
+                <tr>
+                    <td>State</td>
+                    <td>
+                        <select name="state" id="state">
+                            <option value="" selected disabled hidden>--Select--</option>
+                            <% states.forEach(state => { %>
+                            <option value="<%= state %>"><%= state %></option>
+                            <% }); %>
+                        </select>
+                    </td>
+                </tr> 
+
+                <tr>
+                    <td>City</span></td>
+                    <td>
+                        <select name="city" id="city">
+                            <option value="" selected disabled hidden>--Select--</option>
+                            <% cities.forEach(city => { %>
+                            <option value="<%= city %>"><%= city %></option>
+                            <% }); %>
+                        </select>
+                    </td>
+                </tr>  
+
+                <tr>
+                    <td>Area</span></td>
+                    <td>
+                        <select name="area" id="area">
+                            <option value="" selected disabled hidden>--Select--</option>
+                            <% areas.forEach(area => { %>
+                            <option value="<%= area %>"><%= area %></option>
+                            <% }); %>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>PIN Code</span></td>
+                    <td>
+                        <select name="pin" id="pin">
+                            <option value="" selected disabled hidden>--Select--</option>
+                            <% pins.forEach(pin => { %>
+                            <option value="<%= pin %>"><%= pin %></option>
+                            <% }); %>
+                        </select>
+                    </td>
+                </tr>
+                      
+                <tr>
+                    <td>Rent</td>
+                    <td>
+                        <select name="rentRange" id="rentRange">
+                            <option value="" selected disabled hidden>--Select--</option>
+                            <option value="below10000">below 10000(Rs)</option>
+                            <option value="10000-12000">10000-12000(Rs)</option>
+                            <option value="12000-14000">12000-14000(Rs)</option>
+                            <option value="14000-16000">14000-16000(Rs)</option>
+                            <option value="above16000">above 16000(Rs)</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>Advance</td>
+                    <td>
+                        <select name="advanceRange" id="advanceRange">
+                            <option value="" selected disabled hidden>--Select--</option>
+                            <option value="below10000">below 10000(Rs)</option>
+                            <option value="10000-30000">10000-30000(Rs)</option>
+                            <option value="30000-60000">30000-60000(Rs)</option>
+                            <option value="60000-90000">60000-90000(Rs)</option>
+                            <option value="above90000">above 90000(Rs)</option>
+                        </select>
+                    </td>
+                </tr>  
+                
+                <tr>
+                    <td>Independent house</td>
+                    <td>
+                        <input type="radio" name="independentHouse" value="Yes" />Yes
+                        <input type="radio" name="independentHouse" value="No" />No
+                    </td>
+                </tr>
+                <tr>
+                    <td>New house</td>
+                    <td>
+                        <input type="radio" name="newHouse" value="Yes" />Yes
+                        <input type="radio" name="newHouse" value="No" />No
+                    </td>
+                </tr>
+                <tr>
+                    <td>Number of bed rooms</td>
+                    <td>
+                        <select name="rooms" id="rooms">
+                            <option value="" selected disabled hidden>--Select--</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </td>
+                </tr>
+               
+                <tr>
+                    <td>Pets allowed</td>
+                    <td>
+                        <input type="radio" name="pets" value="Yes" />Yes
+                        <input type="radio" name="pets" value="No" />No
+                    </td>
+                </tr>
+                <tr>
+                    <td>For family</td>
+                    <td>
+                        <input type="radio" name="family" value="Yes" />Yes
+                        <input type="radio" name="family" value="No" />No
+                    </td>
+                </tr>
+            
+                <!-- <tr>
+                    <td>Upload image<span class="mandatory">*</span></td>
+                    <td><input type="file" id="housePic" /></td>
+                </tr> -->
+
+            </table>
+            <button type="submit" id="filterBtn" style="cursor:pointer;">Apply filter(s)</button>
+            <button type="button" id="backBtn" style="cursor:pointer;" onclick="back();">Back</button>
+        </form>
+        </div>
+    </div>
+    <% }else{ %>
+        <p style="text-align:center;font-weight:bolder;">No deals :(</p>
+    <% } %>
+    <script>
+        const tr = document.querySelectorAll('tr.tableRow');
+
+        tr.forEach(row => row.addEventListener('click', () => {
+            const id = row.getAttribute("id");
+            
+            window.location.href = '/details/'+id;
+        }));
+
+        function filter(){
+            document.getElementById('hide').style.display = 'block';
+        }
+
+        function back(){
+            document.getElementById('hide').style.display = 'none';
+        }
+    </script>
+<%- include('../partials/footer.ejs') %>

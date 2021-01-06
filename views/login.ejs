@@ -1,0 +1,66 @@
+<%- include('./partials/head.ejs') %> 
+
+<style>
+    p{
+        font-weight: bolder;
+    }
+    a{
+        color: black;
+    }
+    .displayNone{
+        display: none;
+        font-size: 12px;
+        color: red;
+        font-weight: bolder;
+    }
+    td{
+        text-align: center;
+    }
+
+    img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        filter: blur(4px);
+    }
+</style>
+</head>
+<body>
+    
+    <img src="/images/hlws1.jpg">
+    <div style="text-align:center;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);">
+        <h1><span style="font-family: 'Fredoka One', cursive;cursor:pointer;" id="app">
+            HLWB Services</span></h1>
+        <p style="font-size:12px;color:red;display:none;" id="error"></p>
+
+        <form>
+           <table style="margin-left:auto;margin-right:auto;">
+                <tr>
+                    <td>
+                        <p>Email</p>
+                        <input type="text" name="email" id="email" /><br />
+                        <span class="displayNone em">Enter a valid mail id</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Password</p>
+                        <input type="password" name="password" id="password" /><br />
+                        <span class="displayNone pass">Enter a valid password</span>
+                    </td>
+                </tr>
+            </table>
+            <br />          
+            
+            <input type="submit" value="LOGIN" />
+            <p><a href="/register">Register</a></p>
+            
+        </form>
+    </div>
+    <script src="/js/login.js"></script>
+
+<%- include('./partials/footer.ejs') %> 
